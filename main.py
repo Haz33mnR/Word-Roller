@@ -7,7 +7,7 @@ import os
 import sys
 import requests
 import subprocess
-import webbrowser
+import colorsys
 
 # -------------------- Version / GitHub --------------------
 VERSION = "1.0.0"  # Local app version
@@ -60,14 +60,28 @@ def load_roll_file():
 # -------------------- Rolling Animation --------------------
 def rolling_animation(words, label):
     def run():
-        delay = 0.05
-        for _ in range(25):
+        delay = 0.02  # start fast
+        steps = 30
+        for i in range(steps):
             word = random.choice(words)
             label.config(text=word)
+
+            # Color flash effect
+            hue = random.random()
+            r, g, b = [int(x * 255) for x in colorsys.hsv_to_rgb(hue, 1, 1)]
+            label.config(fg=f'#{r:02x}{g:02x}{b:02x}')
+
+            # Font size change for pop effect
+            font_size = 18 + i % 5
+            label.config(font=("Arial", font_size))
+
             time.sleep(delay)
-            delay += 0.02
+            delay += 0.03  # slow down gradually (easing)
+
+        # Final word
         chosen = random.choice(words)
-        label.config(text=f"🎉 Final: {chosen}")
+        label.config(text=f"🎉 Final: {chosen}", fg="black", font=("Arial", 20))
+
     threading.Thread(target=run).start()
 
 def start_roll(filename, label):
@@ -131,7 +145,7 @@ def show_credits():
         "Credits",
         f"🎲 Word Roller App\n"
         f"Version: {INSTALLED_VERSION}\n\n"
-        f"Made by: Haz33mn:)\n"
+        f"Made by: Haz33mn\n"
         f"Special thanks to: ChatGPT\n\n"
         f"🔗 GitHub: {GITHUB_PAGE}"
     )
