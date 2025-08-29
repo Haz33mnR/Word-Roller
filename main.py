@@ -10,19 +10,21 @@ import subprocess
 import webbrowser
 
 # -------------------- Version / GitHub --------------------
-VERSION = "1.0.0"
+VERSION = "1.0.0"  # Local app version
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/Haz33mnR/Word-Roller/main/version.txt"
 UPDATE_URL = "https://raw.githubusercontent.com/Haz33mnR/Word-Roller/main/main.py"
 GITHUB_PAGE = "https://github.com/Haz33mnR/Word-Roller"
 
 INSTALLED_VERSION_FILE = "installed_version.txt"
 
-# Read installed version
+# Read installed version or set to current version if file doesn't exist
 if os.path.exists(INSTALLED_VERSION_FILE):
     with open(INSTALLED_VERSION_FILE, "r") as f:
         INSTALLED_VERSION = f.read().strip()
 else:
     INSTALLED_VERSION = VERSION
+    with open(INSTALLED_VERSION_FILE, "w") as f:
+        f.write(VERSION)
 
 # -------------------- File Handling --------------------
 def create_roll_file():
@@ -129,7 +131,7 @@ def show_credits():
         "Credits",
         f"🎲 Word Roller App\n"
         f"Version: {INSTALLED_VERSION}\n\n"
-        f"Made by: Haz33mn:)\n"
+        f"Made by: Haz33mn\n"
         f"Special thanks to: ChatGPT\n\n"
         f"🔗 GitHub: {GITHUB_PAGE}"
     )
@@ -190,4 +192,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
