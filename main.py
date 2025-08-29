@@ -131,7 +131,7 @@ def show_credits():
         "Credits",
         f"🎲 Word Roller App\n"
         f"Version: {INSTALLED_VERSION}\n\n"
-        f"Made by: Haz33mn\n"
+        f"Made by: Haz33mn:)\n"
         f"Special thanks to: ChatGPT\n\n"
         f"🔗 GitHub: {GITHUB_PAGE}"
     )
