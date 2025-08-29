@@ -11,9 +11,9 @@ import webbrowser
 
 # -------------------- Version / GitHub --------------------
 VERSION = "1.0.0"
-GITHUB_VERSION_URL = "https://raw.githubusercontent.com/yourusername/WordRoller/main/version.txt"
-UPDATE_URL = "https://raw.githubusercontent.com/yourusername/WordRoller/main/main.py"
-GITHUB_PAGE = "https://github.com/yourusername/WordRoller"
+GITHUB_VERSION_URL = "https://raw.githubusercontent.com/Haz33mnR/Word-Roller/main/version.txt"
+UPDATE_URL = "https://raw.githubusercontent.com/Haz33mnR/Word-Roller/main/main.py"
+GITHUB_PAGE = "https://github.com/Haz33mnR/Word-Roller"
 
 INSTALLED_VERSION_FILE = "installed_version.txt"
 
@@ -69,6 +69,8 @@ def rolling_animation(words, label):
     threading.Thread(target=run).start()
 
 def start_roll(filename, label):
+    if not filename:
+        return
     with open(filename, "r", encoding="utf-8") as f:
         words = [line.strip() for line in f if line.strip()]
     if not words:
@@ -78,7 +80,7 @@ def start_roll(filename, label):
 
 # -------------------- Editor --------------------
 def edit_roll_file(filename):
-    if not os.path.exists(filename):
+    if not filename or not os.path.exists(filename):
         messagebox.showerror("Error", "File not found!")
         return
 
@@ -188,3 +190,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
